@@ -1,0 +1,40 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "honorandcam",
+	"main": "./dist/_worker.js/index.js",
+	"compatibility_date": "2025-09-03",
+	"compatibility_flags": [
+		"nodejs_compat",
+		"global_fetch_strictly_public"
+	],
+	"assets": {
+		"binding": "ASSETS",
+		"directory": "./dist"
+	},
+	"kv_namespaces": [
+		{
+			"binding": "GUESTS",
+			"id": "your-guests-kv-id",
+			"preview_id": "your-guests-preview-kv-id"
+		},
+		{
+			"binding": "RSVPS",
+			"id": "your-rsvps-kv-id", 
+			"preview_id": "your-rsvps-preview-kv-id"
+		}
+	],
+	"observability": {
+		"enabled": true
+	},
+	"routes": [
+		{
+			"pattern": "honorandcam.love",
+			"zone_id": "9f554c61c6cfd9adc654f7b86960a36b",
+			"custom_domain": true
+		},
+	],
+}

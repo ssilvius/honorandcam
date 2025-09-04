@@ -1,0 +1,124 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+---
+import Layout from '../layouts/Layout.astro';
+import RSVPLookup from '../components/RSVPLookup';
+---
+
+<Layout title="RSVP - Honor & Cam">
+  <main class="min-h-screen bg-gradient-to-br from-rose-50 to-pink-50 py-12">
+    <div class="container mx-auto px-4 max-w-2xl">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">RSVP</h1>
+        <p class="text-lg text-gray-600">
+          Please enter the code from your invitation to confirm your attendance
+        </p>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow-lg p-8">
+        <RSVPLookup client:load />
+      </div>
+    </div>
+  </main>
+</Layout>
+
+        <!-- Guest Count -->
+        <div>
+          <label for="guests" class="block text-sm font-medium text-charcoal mb-2">
+            Number of guests (including yourself)
+          </label>
+          <select 
+            id="guests" 
+            name="guests" 
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sage"
+          >
+            <option value="1">1</option>
+            <option value="2">2</option>
+          </select>
+        </div>
+
+        <!-- Plus One Name -->
+        <div id="plusOneField" class="hidden">
+          <label for="plusOneName" class="block text-sm font-medium text-charcoal mb-2">
+            Guest Name
+          </label>
+          <input 
+            type="text" 
+            id="plusOneName" 
+            name="plusOneName" 
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sage"
+          />
+        </div>
+
+        <!-- Dietary Restrictions -->
+        <div>
+          <label for="dietary" class="block text-sm font-medium text-charcoal mb-2">
+            Dietary Restrictions or Allergies
+          </label>
+          <textarea 
+            id="dietary" 
+            name="dietary" 
+            rows="3"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sage"
+            placeholder="Please let us know about any dietary needs..."
+          ></textarea>
+        </div>
+
+        <!-- Song Request -->
+        <div>
+          <label for="songRequest" class="block text-sm font-medium text-charcoal mb-2">
+            Song Request
+          </label>
+          <input 
+            type="text" 
+            id="songRequest" 
+            name="songRequest" 
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sage"
+            placeholder="A song that gets you dancing..."
+          />
+        </div>
+
+        <!-- Message -->
+        <div>
+          <label for="message" class="block text-sm font-medium text-charcoal mb-2">
+            Message for the Happy Couple
+          </label>
+          <textarea 
+            id="message" 
+            name="message" 
+            rows="4"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sage"
+            placeholder="Share your excitement, well wishes, or memories..."
+          ></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+          <button 
+            type="submit" 
+            class="bg-sage text-white px-8 py-3 rounded-lg text-lg hover:bg-opacity-90 transition-all"
+          >
+            Send RSVP
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Show/hide plus one field based on guest count
+    const guestsSelect = document.getElementById('guests');
+    const plusOneField = document.getElementById('plusOneField');
+    
+    guestsSelect?.addEventListener('change', (e) => {
+      const target = e.target as HTMLSelectElement;
+      if (target.value === '2') {
+        plusOneField?.classList.remove('hidden');
+      } else {
+        plusOneField?.classList.add('hidden');
+      }
+    });
+  </script>
+</Layout>

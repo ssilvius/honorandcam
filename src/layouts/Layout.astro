@@ -1,0 +1,45 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = "Honor & Cam's Wedding", description = "Join us in celebrating our special day" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-cream text-charcoal font-serif">
+    <nav class="bg-white shadow-sm">
+      <div class="max-w-4xl mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <a href="/" class="text-2xl font-bold text-sage">Honor & Cam</a>
+          <div class="space-x-6">
+            <a href="/" class="hover:text-sage transition-colors">Home</a>
+            <a href="/our-story" class="hover:text-sage transition-colors">Our Story</a>
+            <a href="/wedding-details" class="hover:text-sage transition-colors">Details</a>
+            <a href="/rsvp" class="hover:text-sage transition-colors">RSVP</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <main>
+      <slot />
+    </main>
+    
+    <footer class="bg-sage text-white py-8 mt-16">
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <p>&copy; 2025 Honor & Cam. Made with 💕</p>
+      </div>
+    </footer>
+  </body>
+</html>

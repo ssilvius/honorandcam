@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const stories = await getCollection('stories');
+const sortedStories = stories.sort((a, b) => 
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<Layout title="Our Story">
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <h1 class="text-5xl font-serif text-center text-charcoal mb-12">Our Story</h1>
+    
+    <div class="space-y-16">
+      {sortedStories.map(async (story) => {
+        const { Content } = await story.render();
+        return (
+          <article class="prose prose-lg max-w-none">
+            <Content />
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</Layout>
