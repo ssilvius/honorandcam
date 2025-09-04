@@ -84,7 +84,7 @@ export default function RSVPLookup({}: RSVPLookupProps) {
       <div className="space-y-6">
         <form onSubmit={handleLookup} className="space-y-4">
           <div>
-            <label htmlFor="code" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="code" className="block text-sm font-medium text-emerald-800 mb-2">
               Invitation Code
             </label>
             <input
@@ -93,7 +93,7 @@ export default function RSVPLookup({}: RSVPLookupProps) {
               value={code}
               onChange={(e) => setCode(e.target.value)}
               placeholder="Enter 6-character code"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500 uppercase"
+              className="w-full px-3 py-2 border border-emerald-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 uppercase"
               maxLength={6}
               required
             />
@@ -105,13 +105,13 @@ export default function RSVPLookup({}: RSVPLookupProps) {
           <button
             type="submit"
             disabled={looking || !code.trim()}
-            className="w-full bg-rose-600 text-white py-2 px-4 rounded-md hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-emerald-800 py-2 px-4 rounded-md hover:from-yellow-300 hover:to-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
           >
             {looking ? 'Looking up...' : 'Find My Invitation'}
           </button>
         </form>
         
-        <div className="text-center text-sm text-gray-600">
+        <div className="text-center text-sm text-emerald-600">
           <p>Don't have a code? Contact us at [your-email]</p>
         </div>
       </div>
@@ -120,13 +120,13 @@ export default function RSVPLookup({}: RSVPLookupProps) {
 
   return (
     <div className="space-y-6">
-      <div className="bg-gray-50 p-4 rounded-lg">
-        <h3 className="text-lg font-semibold text-gray-800 mb-2">Welcome!</h3>
-        <p className="text-gray-600">
+      <div className="bg-emerald-50 p-4 rounded-lg border border-yellow-200">
+        <h3 className="text-lg font-semibold text-emerald-800 mb-2">Welcome!</h3>
+        <p className="text-emerald-700">
           We found your invitation for: <strong>{guest.primaryName}</strong>
         </p>
         {guest.address && (
-          <p className="text-sm text-gray-500 mt-1">{guest.address}</p>
+          <p className="text-sm text-emerald-600 mt-1">{guest.address}</p>
         )}
       </div>
 
@@ -147,7 +147,7 @@ export default function RSVPLookup({}: RSVPLookupProps) {
         
         {/* Attendance */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-3">
+          <label className="block text-sm font-medium text-emerald-800 mb-3">
             Will you be attending? *
           </label>
           <div className="space-y-2">
@@ -157,9 +157,9 @@ export default function RSVPLookup({}: RSVPLookupProps) {
                 name="attending"
                 value="true"
                 required
-                className="mr-2 text-rose-600"
+                className="mr-2 text-yellow-500 focus:ring-yellow-500"
               />
-              <span>Yes, we'll be there! 🎉</span>
+              <span className="text-emerald-700">Yes, we'll be there! 🎉</span>
             </label>
             <label className="flex items-center">
               <input
@@ -167,16 +167,16 @@ export default function RSVPLookup({}: RSVPLookupProps) {
                 name="attending"
                 value="false"
                 required
-                className="mr-2 text-rose-600"
+                className="mr-2 text-yellow-500 focus:ring-yellow-500"
               />
-              <span>Sorry, can't make it 😢</span>
+              <span className="text-emerald-700">Sorry, can't make it 😢</span>
             </label>
           </div>
         </div>
 
         {/* Guest Names */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-3">
+          <label className="block text-sm font-medium text-emerald-800 mb-3">
             Guest Names (up to {guest.maxGuests})
           </label>
           <div className="space-y-2">
@@ -187,7 +187,7 @@ export default function RSVPLookup({}: RSVPLookupProps) {
                   value={name}
                   onChange={(e) => updateGuestName(index, e.target.value)}
                   placeholder={`Guest ${index + 1} name`}
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500"
+                  className="flex-1 px-3 py-2 border border-emerald-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
                   required
                 />
                 {guestNames.length > 1 && (
@@ -206,7 +206,7 @@ export default function RSVPLookup({}: RSVPLookupProps) {
               <button
                 type="button"
                 onClick={addGuest}
-                className="text-rose-600 hover:text-rose-700 text-sm"
+                className="text-yellow-600 hover:text-yellow-700 text-sm font-medium"
               >
                 + Add another guest
               </button>
@@ -218,42 +218,42 @@ export default function RSVPLookup({}: RSVPLookupProps) {
 
         {/* Dietary Restrictions */}
         <div>
-          <label htmlFor="dietary" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="dietary" className="block text-sm font-medium text-emerald-800 mb-2">
             Dietary Restrictions or Allergies
           </label>
           <textarea
             id="dietary"
             name="dietaryRestrictions"
             rows={3}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500"
+            className="w-full px-3 py-2 border border-emerald-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
             placeholder="Let us know about any dietary needs..."
           />
         </div>
 
         {/* Song Request */}
         <div>
-          <label htmlFor="song" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="song" className="block text-sm font-medium text-emerald-800 mb-2">
             Song Request
           </label>
           <input
             type="text"
             id="song"
             name="songRequest"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500"
+            className="w-full px-3 py-2 border border-emerald-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
             placeholder="Request a song for the reception!"
           />
         </div>
 
         {/* Notes */}
         <div>
-          <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="notes" className="block text-sm font-medium text-emerald-800 mb-2">
             Additional Notes
           </label>
           <textarea
             id="notes"
             name="notes"
             rows={3}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500"
+            className="w-full px-3 py-2 border border-emerald-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
             placeholder="Anything else you'd like us to know?"
           />
         </div>
@@ -261,7 +261,7 @@ export default function RSVPLookup({}: RSVPLookupProps) {
         <button
           type="submit"
           disabled={isPending}
-          className="w-full bg-rose-600 text-white py-3 px-4 rounded-md hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+          className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-emerald-800 py-3 px-4 rounded-md hover:from-yellow-300 hover:to-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
         >
           {isPending ? 'Submitting...' : 'Submit RSVP'}
         </button>
@@ -273,7 +273,7 @@ export default function RSVPLookup({}: RSVPLookupProps) {
           setCode('');
           setLookupError('');
         }}
-        className="w-full text-gray-600 hover:text-gray-800 text-sm"
+        className="w-full text-emerald-600 hover:text-emerald-800 text-sm mt-4"
       >
         ← Use a different code
       </button>

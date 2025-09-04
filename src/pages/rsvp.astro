@@ -4,16 +4,21 @@ import RSVPLookup from '../components/RSVPLookup';
 ---
 
 <Layout title="RSVP - Honor & Cam">
-  <main class="min-h-screen bg-gradient-to-br from-rose-50 to-pink-50 py-12">
-    <div class="container mx-auto px-4 max-w-2xl">
+  <main class="min-h-screen bg-gradient-to-br from-emerald-700 via-emerald-600 to-emerald-500 pt-16">
+    <div class="container mx-auto px-4 py-16 max-w-2xl">
       <div class="text-center mb-12">
-        <h1 class="text-4xl font-bold text-gray-800 mb-4">RSVP</h1>
-        <p class="text-lg text-gray-600">
+        <h1 class="text-4xl md:text-5xl font-serif mb-4">
+          <span style="background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 4px 8px rgba(251, 191, 36, 0.3);">
+            RSVP
+          </span>
+        </h1>
+        <div class="w-24 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-500 mx-auto mb-6 shadow-lg"></div>
+        <p class="text-lg text-yellow-100">
           Please enter the code from your invitation to confirm your attendance
         </p>
       </div>
       
-      <div class="bg-white rounded-lg shadow-lg p-8">
+      <div class="bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl p-8 border border-yellow-200">
         <RSVPLookup client:load />
       </div>
     </div>

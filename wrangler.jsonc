@@ -18,13 +18,11 @@
 	"kv_namespaces": [
 		{
 			"binding": "GUESTS",
-			"id": "your-guests-kv-id",
-			"preview_id": "your-guests-preview-kv-id"
+			"id": "5a5d4ec38d44461aa8746061ab920a05"
 		},
 		{
 			"binding": "RSVPS",
-			"id": "your-rsvps-kv-id", 
-			"preview_id": "your-rsvps-preview-kv-id"
+			"id": "d354b66435164fe9a578bd0061130da0"
 		}
 	],
 	"observability": {

@@ -1,0 +1,15 @@
+---
+interface Props {
+  children: any;
+}
+
+const { children } = Astro.props;
+---
+
+<section class="py-20 bg-emerald-50">
+  <div class="max-w-3xl mx-auto px-4 text-center">
+    <blockquote class="text-3xl md:text-4xl italic text-emerald-800 leading-relaxed font-light">
+      <slot />
+    </blockquote>
+  </div>
+</section>

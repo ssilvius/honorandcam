@@ -1,68 +1,11 @@
 ---
+import { getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+
+const homeContent = await getEntry('pages', 'home');
+const { Content } = await homeContent.render();
 ---
 
 <Layout title="Honor & Cam's Wedding">
-  <!-- Hero Section -->
-  <section class="bg-gradient-to-b from-cream to-white py-20">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <h1 class="text-6xl font-serif text-charcoal mb-4">Honor & Cam</h1>
-      <p class="text-2xl text-sage mb-6">are getting married!</p>
-      <p class="text-xl text-charcoal mb-8">October 14th, 2025 • The Garden Estate</p>
-      <a href="/rsvp" class="bg-sage text-white px-8 py-3 rounded-lg text-lg hover:bg-opacity-90 transition-all">
-        RSVP Now
-      </a>
-    </div>
-  </section>
-
-  <!-- Quote Section -->
-  <section class="py-16 bg-white">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <blockquote class="text-2xl italic text-charcoal leading-relaxed">
-        "Being deeply loved by someone gives you strength, while loving someone deeply gives you courage."
-      </blockquote>
-      <p class="text-sage mt-4">— Lao Tzu</p>
-    </div>
-  </section>
-
-  <!-- Key Information -->
-  <section class="py-16 bg-cream">
-    <div class="max-w-4xl mx-auto px-4">
-      <h2 class="text-4xl font-serif text-center text-charcoal mb-12">Wedding Details</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="text-center">
-          <h3 class="text-xl font-semibold text-sage mb-4">When</h3>
-          <p class="text-charcoal">Saturday, October 14th, 2025</p>
-          <p class="text-charcoal">4:00 PM Ceremony</p>
-        </div>
-        <div class="text-center">
-          <h3 class="text-xl font-semibold text-sage mb-4">Where</h3>
-          <p class="text-charcoal">The Garden Estate</p>
-          <p class="text-charcoal">123 Beautiful Lane</p>
-          <p class="text-charcoal">Somewhere, CA</p>
-        </div>
-        <div class="text-center">
-          <h3 class="text-xl font-semibold text-sage mb-4">Dress Code</h3>
-          <p class="text-charcoal">Garden Party Elegance</p>
-          <p class="text-charcoal">Semi-formal attire</p>
-        </div>
-      </div>
-      <div class="text-center mt-12">
-        <a href="/wedding-details" class="text-sage hover:underline text-lg">
-          View Full Details →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Call to Action -->
-  <section class="py-16 bg-sage text-white">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h2 class="text-3xl font-serif mb-6">Can't Wait to Celebrate With You!</h2>
-      <p class="text-xl mb-8">Please let us know if you'll be joining us for our special day.</p>
-      <a href="/rsvp" class="bg-white text-sage px-8 py-3 rounded-lg text-lg hover:bg-opacity-90 transition-all">
-        RSVP by September 14th
-      </a>
-    </div>
-  </section>
+  <Content />
 </Layout>

@@ -15,31 +15,131 @@ const { title = "Honor & Cam's Wedding", description = "Join us in celebrating o
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
     <title>{title}</title>
   </head>
-  <body class="bg-cream text-charcoal font-serif">
-    <nav class="bg-white shadow-sm">
-      <div class="max-w-4xl mx-auto px-4 py-4">
-        <div class="flex justify-between items-center">
-          <a href="/" class="text-2xl font-bold text-sage">Honor & Cam</a>
-          <div class="space-x-6">
-            <a href="/" class="hover:text-sage transition-colors">Home</a>
-            <a href="/our-story" class="hover:text-sage transition-colors">Our Story</a>
-            <a href="/wedding-details" class="hover:text-sage transition-colors">Details</a>
-            <a href="/rsvp" class="hover:text-sage transition-colors">RSVP</a>
+  <body class="bg-emerald-900 text-yellow-50 font-sans">>
+    <!-- Transparent navbar that appears on scroll -->
+        <!-- Transparent navbar that appears on scroll -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out opacity-0 translate-y-[-100%]">
+      <div class="backdrop-blur-lg bg-emerald-900/20 border-b border-yellow-200/10 shadow-2xl">
+        <div class="max-w-6xl mx-auto px-4 py-3">
+          <div class="flex justify-between items-center">
+            <a href="/" class="text-2xl font-bold text-yellow-200 hover:text-yellow-100 transition-colors">
+              <span style="font-family: 'Sacramento', cursive; background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                Honor & Cam
+              </span>
+            </a>
+            <div class="hidden md:flex space-x-8">
+              <a href="/" class="text-yellow-50/90 hover:text-yellow-200 transition-colors font-medium">Home</a>
+              <a href="/our-story" class="text-yellow-50/90 hover:text-yellow-200 transition-colors font-medium">Our Story</a>
+              <a href="/wedding-details" class="text-yellow-50/90 hover:text-yellow-200 transition-colors font-medium">Details</a>
+              <a href="/rsvp" class="bg-gradient-to-r from-yellow-400/90 to-yellow-500/90 backdrop-blur-sm text-emerald-900 px-4 py-2 rounded-full hover:from-yellow-300 hover:to-yellow-400 transition-all font-medium shadow-lg">
+                RSVP
+              </a>
+            </div>
+            <!-- Mobile menu button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-yellow-50/90 hover:text-yellow-200">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </button>
+          </div>
+          <!-- Mobile menu -->
+          <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4 border-t border-yellow-200/10">
+            <div class="flex flex-col space-y-3 pt-4">
+              <a href="/" class="text-yellow-50/90 hover:text-yellow-200 transition-colors font-medium">Home</a>
+              <a href="/our-story" class="text-yellow-50/90 hover:text-yellow-200 transition-colors font-medium">Our Story</a>
+              <a href="/wedding-details" class="text-yellow-50/90 hover:text-yellow-200 transition-colors font-medium">Details</a>
+              <a href="/rsvp" class="bg-gradient-to-r from-yellow-400/90 to-yellow-500/90 backdrop-blur-sm text-emerald-900 px-4 py-2 rounded-full hover:from-yellow-300 hover:to-yellow-400 transition-all font-medium text-center shadow-lg">
+                RSVP
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </nav>
-    
+
     <main>
       <slot />
     </main>
     
-    <footer class="bg-sage text-white py-8 mt-16">
-      <div class="max-w-4xl mx-auto px-4 text-center">
-        <p>&copy; 2025 Honor & Cam. Made with 💕</p>
+    <footer class="bg-emerald-900 text-yellow-50 py-12">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="grid md:grid-cols-3 gap-8 text-center md:text-left">
+          <div>
+            <h3 class="text-2xl font-bold mb-4">
+              <span style="background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                Honor & Cam
+              </span>
+            </h3>
+            <p class="text-yellow-200">Celebrating love on October 14th, 2025</p>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4 text-yellow-200">Quick Links</h4>
+            <div class="space-y-2">
+              <a href="/our-story" class="block text-yellow-100 hover:text-yellow-300 transition-colors">Our Story</a>
+              <a href="/wedding-details" class="block text-yellow-100 hover:text-yellow-300 transition-colors">Wedding Details</a>
+              <a href="/rsvp" class="block text-yellow-100 hover:text-yellow-300 transition-colors">RSVP</a>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4 text-yellow-200">Contact</h4>
+            <p class="text-yellow-100">Questions about the wedding?</p>
+            <p class="text-yellow-100">Reach out to us anytime!</p>
+          </div>
+        </div>
+        <div class="border-t border-emerald-800 mt-8 pt-8 text-center">
+          <p class="text-yellow-300">&copy; 2025 Honor & Cam. Made with 💕</p>
+        </div>
       </div>
     </footer>
+
+    <script>
+      // Navbar scroll behavior
+      const navbar = document.getElementById('navbar');
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      let lastScrollY = window.scrollY;
+      
+      function updateNavbar() {
+        const currentScrollY = window.scrollY;
+        
+        if (currentScrollY > 256) {
+          // Show navbar when scrolled past 256px
+          navbar.classList.remove('opacity-0', 'translate-y-[-100%]');
+          navbar.classList.add('opacity-100', 'translate-y-0');
+        } else {
+          // Hide navbar when at top
+          navbar.classList.remove('opacity-100', 'translate-y-0');
+          navbar.classList.add('opacity-0', 'translate-y-[-100%]');
+        }
+        
+        lastScrollY = currentScrollY;
+      }
+      
+      // Mobile menu toggle
+      mobileMenuBtn?.addEventListener('click', () => {
+        mobileMenu?.classList.toggle('hidden');
+      });
+      
+      // Throttled scroll event
+      let ticking = false;
+      function handleScroll() {
+        if (!ticking) {
+          requestAnimationFrame(updateNavbar);
+          ticking = true;
+          setTimeout(() => { ticking = false; }, 10);
+        }
+      }
+      
+      window.addEventListener('scroll', handleScroll);
+      
+      // Initial check
+      updateNavbar();
+    </script>
   </body>
 </html>
