@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { RSVPSchema } from '../../lib/guests';
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   try {
     const formData = await request.formData();
     
@@ -19,11 +19,17 @@ export const POST: APIRoute = async ({ request }) => {
     // Validate the data
     const validatedData = RSVPSchema.parse(rsvpData);
     
-    // In production, save to Cloudflare KV:
-    // await env.RSVPS.put(validatedData.code, JSON.stringify(validatedData));
-    
-    // For now, just log it
-    console.log('RSVP Received:', validatedData);
+    // Save to KV in production (Cloudflare runtime)
+    if ('RSVPS' in locals && locals.RSVPS) {
+      try {
+        await (locals.RSVPS as KVNamespace).put(validatedData.code, JSON.stringify(validatedData));
+      } catch (error) {
+        console.error('KV storage failed:', error);
+      }
+    } else {
+      // Log in development
+      console.log('RSVP Received:', validatedData);
+    }
     
     return new Response('RSVP submitted successfully!', { status: 200 });
     

@@ -10,12 +10,18 @@ export const GET: APIRoute = async ({ url, locals }) => {
   
   let guest;
   
-  // Try to get from KV in production
-  if (locals.runtime?.env?.GUESTS) {
-    const guestData = await locals.runtime.env.GUESTS.get(code.toUpperCase());
-    guest = guestData ? JSON.parse(guestData) : null;
-  } else {
-    // Fallback to sample data in development
+  // Try to get from KV in production (Cloudflare runtime)
+  if ('GUESTS' in locals && locals.GUESTS) {
+    try {
+      const guestData = await (locals.GUESTS as KVNamespace).get(code.toUpperCase());
+      guest = guestData ? JSON.parse(guestData) : null;
+    } catch (error) {
+      console.error('KV lookup failed:', error);
+    }
+  }
+  
+  // Fallback to sample data in development or if KV fails
+  if (!guest) {
     guest = SAMPLE_GUESTS.find(g => g.code === code.toUpperCase());
   }
   
