@@ -6,7 +6,7 @@ const { frontmatter } = Astro.props;
 ---
 
 <Layout title={frontmatter.title} description={frontmatter.description}>
-  <div class="max-w-4xl mx-auto px-4 py-12">
+  <div class="max-w-4xl py-12">
     <article class="mdx-content">
       <slot />
     </article>
@@ -15,7 +15,7 @@ const { frontmatter } = Astro.props;
 
 <style>
   .mdx-content :global(h1) {
-    @apply text-4xl font-bold mb-6 text-accent;
+    @apply text-7xl font-bold mb-6 text-accent;
     font-family: 'Sacramento', cursive;
   }
   
@@ -40,7 +40,7 @@ const { frontmatter } = Astro.props;
   }
   
   .mdx-content :global(p) {
-    @apply text-foreground mb-4 leading-relaxed;
+    @apply text-foreground text-xl leading-relaxed;
   }
   
   .mdx-content :global(a) {
