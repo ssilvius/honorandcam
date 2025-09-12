@@ -15,7 +15,12 @@ const { frontmatter } = Astro.props;
 
 <style>
   .mdx-content :global(h1) {
-    @apply text-7xl font-bold mb-6 text-primary font-fraunces;
+    @apply text-7xl font-bold mb-6 text-secondary font-fraunces;
+    text-shadow: 
+      -2px -2px 0 #F7E6A1,
+      2px -2px 0 #F7E6A1,
+      -2px 2px 0 #F7E6A1,
+      2px 2px 0 #F7E6A1;
   }
   
   .mdx-content :global(h2) {
