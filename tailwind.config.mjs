@@ -4,12 +4,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        cream: '#faf7f2',
-        sage: '#9caf88',
-        charcoal: '#2c2c2c',
-        blush: '#f4c2c2',
-        gold: '#d4af37',
+        background: '#284738',
+        foreground: '#FBFEFB',
+        primary: '#5F9770',
+        secondary: '#A24759',
+        accent: '#F7E6A1'
       },
+    backgroundSize: {
+      'auto': 'auto',
+      'cover': 'cover',
+      'contain': 'contain',
+      '50%': '50%',
+      '16': '4rem',
+    },
       fontFamily: {
         serif: ['Georgia', 'serif'],
         sans: ['Inter', 'sans-serif'],

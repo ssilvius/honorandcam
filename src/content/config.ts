@@ -9,17 +9,6 @@ const pages = defineCollection({
   }),
 });
 
-const stories = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    date: z.date(),
-    author: z.string().optional(),
-    featured: z.boolean().default(false),
-  }),
-});
-
 export const collections = {
   pages,
-  stories,
 };

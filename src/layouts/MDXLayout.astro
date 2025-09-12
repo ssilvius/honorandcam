@@ -1,0 +1,93 @@
+---
+// MDX Layout wrapper that automatically applies typography
+import Layout from '../layouts/Layout.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title} description={frontmatter.description}>
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <article class="mdx-content">
+      <slot />
+    </article>
+  </div>
+</Layout>
+
+<style>
+  .mdx-content :global(h1) {
+    @apply text-4xl font-bold mb-6 text-accent;
+    font-family: 'Sacramento', cursive;
+  }
+  
+  .mdx-content :global(h2) {
+    @apply text-3xl font-semibold mb-5 text-accent;
+  }
+  
+  .mdx-content :global(h3) {
+    @apply text-2xl font-semibold mb-4 text-accent;
+  }
+  
+  .mdx-content :global(h4) {
+    @apply text-xl font-semibold mb-3 text-accent;
+  }
+  
+  .mdx-content :global(h5) {
+    @apply text-lg font-semibold mb-3 text-accent;
+  }
+  
+  .mdx-content :global(h6) {
+    @apply text-base font-semibold mb-2 text-accent;
+  }
+  
+  .mdx-content :global(p) {
+    @apply text-foreground mb-4 leading-relaxed;
+  }
+  
+  .mdx-content :global(a) {
+    @apply text-primary hover:text-secondary transition-colors underline;
+  }
+  
+  .mdx-content :global(ul) {
+    @apply list-disc list-inside mb-4 text-foreground space-y-2;
+  }
+  
+  .mdx-content :global(ol) {
+    @apply list-decimal list-inside mb-4 text-foreground space-y-2;
+  }
+  
+  .mdx-content :global(li) {
+    @apply leading-relaxed;
+  }
+  
+  .mdx-content :global(blockquote) {
+    @apply border-l-4 border-primary pl-6 py-4 my-6 bg-primary/10 italic text-foreground;
+  }
+  
+  .mdx-content :global(strong) {
+    @apply font-semibold text-accent;
+  }
+  
+  .mdx-content :global(em) {
+    @apply italic text-foreground/90;
+  }
+  
+  .mdx-content :global(code) {
+    @apply bg-background/50 text-accent px-2 py-1 rounded text-sm font-mono;
+  }
+  
+  .mdx-content :global(pre) {
+    @apply bg-background/50 p-4 rounded-lg overflow-x-auto mb-4;
+  }
+  
+  .mdx-content :global(pre code) {
+    @apply bg-transparent p-0 text-foreground;
+  }
+  
+  .mdx-content :global(hr) {
+    @apply border-primary my-8;
+  }
+  
+  .mdx-content :global(img) {
+    @apply rounded-lg shadow-lg max-w-full h-auto my-6;
+  }
+</style>
