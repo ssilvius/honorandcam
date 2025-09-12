@@ -18,8 +18,10 @@ export default {
       '16': '4rem',
     },
       fontFamily: {
-        serif: ['Georgia', 'serif'],
-        sans: ['Inter', 'sans-serif'],
+        'fraunces': ['Fraunces', 'serif'],
+        'questrial': ['Questrial', 'sans-serif'],
+        serif: ['Fraunces', 'Georgia', 'serif'],
+        sans: ['Questrial', 'Inter', 'sans-serif'],
       },
     },
   },
