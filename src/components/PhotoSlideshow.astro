@@ -1,0 +1,40 @@
+---
+// Photo slideshow component with 8-second fade transitions
+---
+
+<div class="w-full max-w-2xl mx-auto mb-4 sm:mb-8 md:mb-12 lg:mb-16">
+  <div class="relative w-full aspect-[4/3] min-h-[300px] rounded-xl overflow-hidden shadow-2xl">
+    <img src="/IMG_20240817_095656174.jpg" alt="Honor & Cam" class="slideshow-photo active absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-[1200ms] ease-in-out" />
+    <img src="/2024-08-16.jpg" alt="Honor & Cam" class="slideshow-photo absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1200ms] ease-in-out" />
+    <img src="/IMG_20250523_160600.jpg" alt="Honor & Cam" class="slideshow-photo absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1200ms] ease-in-out" />
+    <img src="/IMG_20250523_160602.jpg" alt="Honor & Cam" class="slideshow-photo absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1200ms] ease-in-out" />
+    <img src="/IMG_20250523_160603.jpg" alt="Honor & Cam" class="slideshow-photo absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1200ms] ease-in-out" />
+    <img src="/IMG_20250726_122243233_HDR_AE.jpg" alt="Honor & Cam" class="slideshow-photo absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1200ms] ease-in-out" />
+    <img src="/IMG_20250902_094640.jpg" alt="Honor & Cam" class="slideshow-photo absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-[1200ms] ease-in-out" />
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const photos = document.querySelectorAll('.slideshow-photo');
+    let currentIndex = 0;
+
+    function showNextPhoto() {
+      // Hide current photo
+      photos[currentIndex].classList.remove('opacity-100');
+      photos[currentIndex].classList.add('opacity-0');
+      
+      // Move to next photo (loop back to 0 when reaching the end)
+      currentIndex = (currentIndex + 1) % photos.length;
+      
+      // Show next photo
+      photos[currentIndex].classList.remove('opacity-0');
+      photos[currentIndex].classList.add('opacity-100');
+    }
+
+    // Start slideshow after initial delay
+    setTimeout(() => {
+      setInterval(showNextPhoto, 8000); // 8 seconds between transitions
+    }, 8000); // 8 second delay before first transition
+  });
+</script>
