@@ -212,15 +212,39 @@ const { frontmatter } = Astro.props;
   window.magneticHover = magneticHover;
   window.magneticReset = magneticReset;
 
+  // Load GSAP dynamically
+  function loadGSAP() {
+    return new Promise((resolve) => {
+      if (window.gsap) {
+        resolve();
+        return;
+      }
+      
+      const script1 = document.createElement('script');
+      script1.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js';
+      script1.onload = () => {
+        const script2 = document.createElement('script');
+        script2.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js';
+        script2.onload = () => resolve();
+        document.head.appendChild(script2);
+      };
+      document.head.appendChild(script1);
+    });
+  }
+
   // GSAP Medieval Manuscript Animations
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', async function() {
+    await loadGSAP();
+    
     // Register ScrollTrigger plugin
-    gsap.registerPlugin(ScrollTrigger);
+    window.gsap.registerPlugin(window.ScrollTrigger);
 
     // Respect user's motion preferences
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
     if (!prefersReducedMotion) {
+      
+      const { gsap } = window;
       
       // 1. Breathing effect on main heading - Illuminated manuscript glow
       gsap.to(".mdx-content h1", {
@@ -360,7 +384,7 @@ const { frontmatter } = Astro.props;
 
     } else {
       // Fallback for reduced motion - still show content but without animations
-      gsap.set(".mdx-content p, .mdx-content h2, .mdx-content img", { opacity: 1 });
+      window.gsap && window.gsap.set(".mdx-content p, .mdx-content h2, .mdx-content img", { opacity: 1 });
     }
   });
 </script>
