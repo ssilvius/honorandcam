@@ -44,6 +44,10 @@ const { frontmatter } = Astro.props;
   .mdx-content :global(a) {
     @apply text-primary hover:text-secondary transition-colors underline;
   }
+
+  .mdx-content :global(a.magnetic-btn) {
+    @apply no-underline;
+  }
   
   .mdx-content :global(ul) {
     @apply list-disc list-inside mb-4 text-foreground space-y-2;
@@ -88,4 +92,123 @@ const { frontmatter } = Astro.props;
   .mdx-content :global(img) {
     @apply rounded-lg shadow-lg max-w-full h-auto my-4 sm:my-6 mx-auto block;
   }
+
+  /* Magnetic Button Styles */
+  .mdx-content :global(.magnetic-btn) {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(135deg, #5F9770 0%, #A24759 50%, #F7E6A1 100%);
+    background-size: 200% 200%;
+    animation: gradient-shift 4s ease-in-out infinite;
+  }
+
+  .mdx-content :global(.magnetic-btn::before) {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    background: conic-gradient(
+      from 0deg at 50% 50%,
+      #5F9770 0deg,
+      #7FB690 60deg,
+      #A24759 120deg,
+      #C85A7A 180deg,
+      #F7E6A1 240deg,
+      #FFE8B8 300deg,
+      #5F9770 360deg
+    );
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .mdx-content :global(.magnetic-btn:hover::before) {
+    opacity: 0.8;
+  }
+
+  .mdx-content :global(.magnetic-btn::after) {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: rgba(40, 71, 56, 0.05);
+    backdrop-filter: blur(8px);
+    z-index: -1;
+  }
+
+  .mdx-content :global(.magnetic-btn:hover) {
+    background-position: 100% 100%;
+    box-shadow: 
+      0 20px 40px rgba(95, 151, 112, 0.3),
+      0 0 60px rgba(162, 71, 89, 0.2),
+      inset 0 1px 2px rgba(247, 230, 161, 0.4);
+    transform: translateY(-4px);
+  }
+
+  .mdx-content :global(.btn-content) {
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+  
+  .mdx-content :global(.btn-content svg) {
+    flex-shrink: 0;
+  }
+
+  .mdx-content :global(.magnetic-btn:hover .btn-content),
+  .mdx-content :global(.magnetic-btn:hover .btn-content *) {
+    text-shadow: 0 0 20px rgba(247, 230, 161, 0.8);
+    color: rgba(40, 71, 56, 0.9) !important;
+  }
+
+  .mdx-content :global(.btn-content p) {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: inherit !important;
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+  }
+
 </style>
+
+<script>
+  function magneticHover(e, element) {
+    const rect = element.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    const mouseX = e.clientX - centerX;
+    const mouseY = e.clientY - centerY;
+    
+    const distance = Math.sqrt(mouseX * mouseX + mouseY * mouseY);
+    const maxDistance = 120;
+    
+    if (distance < maxDistance) {
+      const strength = (maxDistance - distance) / maxDistance;
+      const moveX = mouseX * strength * 0.2;
+      const moveY = mouseY * strength * 0.2;
+      
+      element.style.transform = `translate(${moveX}px, ${moveY}px) translateY(-4px) scale(1.05)`;
+      
+      const hue = Math.atan2(mouseY, mouseX) * (180 / Math.PI) + 180;
+      element.style.filter = `hue-rotate(${hue * 0.1}deg) brightness(1.1) saturate(1.2)`;
+    }
+  }
+  
+  function magneticReset(element) {
+    element.style.transform = '';
+    element.style.filter = '';
+  }
+
+  // Make functions globally available
+  window.magneticHover = magneticHover;
+  window.magneticReset = magneticReset;
+</script>

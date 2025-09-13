@@ -27,7 +27,14 @@ Invites are coming your way soon!
   <a href="https://www.myregistry.com/wedding-registry/honor-silvius-and-cam-hilliard-olympia-wa/4984570/giftlist" 
      target="_blank" 
      rel="noopener noreferrer"
-     class="inline-block bg-gradient-to-r from-primary to-secondary text-foreground px-6 sm:px-8 md:px-12 py-4 sm:py-5 md:py-6 rounded-full no-underline font-bold text-lg sm:text-xl shadow-2xl hover:shadow-3xl transition-all duration-300 uppercase tracking-wide hover:scale-105">
-    🎁 View Our Registry
+     class="magnetic-btn inline-block px-6 sm:px-8 md:px-12 py-4 sm:py-5 md:py-6 rounded-full no-underline"
+     onmousemove="magneticHover(event, this)"
+     onmouseleave="magneticReset(this)">
+    <span class="btn-content font-bold text-lg sm:text-xl text-foreground uppercase tracking-wide gap-3">
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+      </svg>
+      <span>View Our Registry</span>
+    </span>
   </a>
 </div>
