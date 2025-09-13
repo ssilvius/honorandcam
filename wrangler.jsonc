@@ -15,16 +15,6 @@
 		"binding": "ASSETS",
 		"directory": "./dist"
 	},
-	"kv_namespaces": [
-		{
-			"binding": "GUESTS",
-			"id": "5a5d4ec38d44461aa8746061ab920a05"
-		},
-		{
-			"binding": "RSVPS",
-			"id": "d354b66435164fe9a578bd0061130da0"
-		}
-	],
 	"observability": {
 		"enabled": true
 	},
