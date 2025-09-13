@@ -1,8 +1,0 @@
----
-// Custom link component for MDX
-const { href, ...props } = Astro.props;
----
-
-<a href={href} class="text-primary hover:text-secondary transition-colors underline" {...props}>
-  <slot />
-</a>
