@@ -212,9 +212,9 @@ const { frontmatter } = Astro.props;
   window.magneticHover = magneticHover;
   window.magneticReset = magneticReset;
 
-  // Load GSAP dynamically
+  // Load GSAP dynamically with error handling
   function loadGSAP() {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       if (window.gsap) {
         resolve();
         return;
@@ -226,18 +226,28 @@ const { frontmatter } = Astro.props;
         const script2 = document.createElement('script');
         script2.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js';
         script2.onload = () => resolve();
+        script2.onerror = () => reject(new Error('Failed to load ScrollTrigger'));
         document.head.appendChild(script2);
       };
+      script1.onerror = () => reject(new Error('Failed to load GSAP'));
       document.head.appendChild(script1);
     });
   }
 
   // GSAP Medieval Manuscript Animations
   document.addEventListener('DOMContentLoaded', async function() {
-    await loadGSAP();
-    
-    // Register ScrollTrigger plugin
-    window.gsap.registerPlugin(window.ScrollTrigger);
+    try {
+      await loadGSAP();
+      
+      // Register ScrollTrigger plugin
+      window.gsap.registerPlugin(window.ScrollTrigger);
+    } catch (error) {
+      console.warn('GSAP failed to load, animations disabled:', error);
+      // Ensure content is visible even without animations
+      const elements = document.querySelectorAll('.mdx-content p, .mdx-content h2, .mdx-content img');
+      elements.forEach(el => el.style.opacity = '1');
+      return;
+    }
 
     // Respect user's motion preferences
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -368,7 +378,7 @@ const { frontmatter } = Astro.props;
       );
 
       // 6. Roses sidebar subtle fade-in on load
-      gsap.fromTo(".w-32.sm\\:w-32.md\\:w-32.lg\\:w-\\[220px\\].xl\\:w-\\[300px\\] img", 
+      gsap.fromTo(".roses-sidebar img", 
         { 
           opacity: 0,
           x: -20
