@@ -1,0 +1,112 @@
+---
+export interface Props {
+  href: string;
+  text: string;
+  target?: string;
+  rel?: string;
+}
+
+const { href, text, target = "_blank", rel = "noopener noreferrer" } = Astro.props;
+---
+
+<div class="my-8 sm:my-12 text-center">
+  <a href={href} 
+     target={target} 
+     rel={rel}
+     class="magnetic-btn inline-block px-6 sm:px-8 md:px-12 py-4 sm:py-5 md:py-6 rounded-full no-underline"
+     onmousemove="magneticHover(event, this)"
+     onmouseleave="magneticReset(this)">
+    <span class="btn-content font-bold text-lg sm:text-xl text-foreground uppercase tracking-wide gap-3">
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+      </svg>
+      <span>{text}</span>
+    </span>
+  </a>
+</div>
+
+<style>
+  /* Magnetic Button Styles */
+  .magnetic-btn {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(135deg, #5F9770 0%, #A24759 50%, #F7E6A1 100%);
+    background-size: 200% 200%;
+    animation: gradient-shift 4s ease-in-out infinite;
+  }
+
+  .magnetic-btn::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    background: conic-gradient(
+      from 0deg at 50% 50%,
+      #5F9770 0deg,
+      #7FB690 60deg,
+      #A24759 120deg,
+      #C85A7A 180deg,
+      #F7E6A1 240deg,
+      #FFE8B8 300deg,
+      #5F9770 360deg
+    );
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .magnetic-btn:hover::before {
+    opacity: 0.8;
+  }
+
+  .magnetic-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: rgba(40, 71, 56, 0.05);
+    backdrop-filter: blur(8px);
+    z-index: -1;
+  }
+
+  .magnetic-btn:hover {
+    background-position: 100% 100%;
+    box-shadow: 
+      0 20px 40px rgba(95, 151, 112, 0.3),
+      0 0 60px rgba(162, 71, 89, 0.2),
+      inset 0 1px 2px rgba(247, 230, 161, 0.4);
+    transform: translateY(-4px);
+  }
+
+  .btn-content {
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+  
+  .btn-content svg {
+    flex-shrink: 0;
+  }
+
+  .magnetic-btn:hover .btn-content,
+  .magnetic-btn:hover .btn-content * {
+    text-shadow: 0 0 20px rgba(247, 230, 161, 0.8);
+    color: rgba(40, 71, 56, 0.9) !important;
+  }
+
+  .btn-content p {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: inherit !important;
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+  }
+</style>

@@ -5,6 +5,9 @@ order: 1
 layout: ../../layouts/MDXLayout.astro
 ---
 
+import MagneticButton from '../../components/MagneticButton.astro';
+import PhotoSlideshow from '../../components/PhotoSlideshow.astro';
+
 # Honor & Cam's Wedding
 
 ## A Love That Grew From Friendship
@@ -13,7 +16,7 @@ Cam and Honor's love grew from their friendship which blossomed 3 years ago. Thr
 
 Now they're ready for their next adventure together.
 
-![us](/IMG_20240817_095656174.jpg)
+<PhotoSlideshow />
 
 ## Our Celebration
 
@@ -23,18 +26,7 @@ We've decided to elope in an intimate, private ceremony - just the two of us tak
 
 Invites are coming your way soon!
 
-<div class="my-8 sm:my-12 text-center">
-  <a href="https://www.myregistry.com/wedding-registry/honor-silvius-and-cam-hilliard-olympia-wa/4984570/giftlist" 
-     target="_blank" 
-     rel="noopener noreferrer"
-     class="magnetic-btn inline-block px-6 sm:px-8 md:px-12 py-4 sm:py-5 md:py-6 rounded-full no-underline"
-     onmousemove="magneticHover(event, this)"
-     onmouseleave="magneticReset(this)">
-    <span class="btn-content font-bold text-lg sm:text-xl text-foreground uppercase tracking-wide gap-3">
-      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-      </svg>
-      <span>View Our Registry</span>
-    </span>
-  </a>
-</div>
+<MagneticButton 
+  href="https://www.myregistry.com/wedding-registry/honor-silvius-and-cam-hilliard-olympia-wa/4984570/giftlist"
+  text="View Our Registry"
+/>
