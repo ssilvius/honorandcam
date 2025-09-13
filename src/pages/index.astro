@@ -1,6 +1,5 @@
 ---
 import { getEntry } from 'astro:content';
-import Layout from '../layouts/Layout.astro';
 
 const homeContent = await getEntry('pages', 'home');
 let Content;
@@ -11,6 +10,4 @@ if (homeContent) {
 }
 ---
 
-<Layout title="Honor & Cam's Wedding">
-  <Content />
-</Layout>
+<Content />

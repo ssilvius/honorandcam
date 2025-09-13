@@ -20,9 +20,14 @@ const { title = "Honor & Cam's Wedding", description = "Join us in celebrating o
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Questrial&display=swap" rel="stylesheet">
     <title>{title}</title>
   </head>
-  <body class="bg-background text-foreground font-sans h-screen bg-[url('/roses.png')] bg-no-repeat bg-[top_left] bg-fixed bg-[length:480px_1024px]">
+  <body class="bg-background text-foreground font-sans min-h-screen flex">
+    <!-- Left sidebar with roses image -->
+    <div class="w-32 sm:w-32 md:w-32 lg:w-[220px] xl:w-[300px] flex-shrink-0">
+      <img src="/roses.png" alt="" class="w-full h-full object-contain object-left-top" />
+    </div>
 
-    <main class="ml-[280px]">
+    <!-- Main content area -->
+    <main class="flex-1 px-4 sm:px-6 md:px-8 lg:px-12 overflow-x-hidden">
       <slot />
     </main>
   </body>
