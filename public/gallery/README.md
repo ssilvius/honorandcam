@@ -10,14 +10,23 @@ This directory contains the wedding photos that will be displayed on the `/the-d
 4. Images are sorted alphabetically by filename
 5. No code changes needed - just drop files here and rebuild
 
-## Automatic Detection
+## Automatic Detection & Optimization
 
 The gallery component automatically:
 - ✅ Scans this folder during build
 - ✅ Filters for image files (.jpg, .jpeg, .png)
 - ✅ Sorts them alphabetically
-- ✅ Generates the gallery HTML
+- ✅ Generates optimized gallery HTML
+- ✅ Uses Cloudflare image optimization (WebP format, 800px width, 85% quality)
 - ✅ Sets up click handlers for fullscreen view
+- ✅ Provides lazy loading for better performance
+
+## Image Optimization
+When deployed to Cloudflare, images are automatically:
+- 🔄 Converted to WebP format for smaller file sizes
+- 📏 Resized to 800px width for optimal gallery display  
+- 🎯 Compressed to 85% quality for best size/quality balance
+- ⚡ Served from Cloudflare's global CDN
 
 ## Current Photos
 

@@ -1,20 +1,27 @@
 ---
 // Photo Gallery component with masonry layout and fullscreen modal
+import { Image } from 'astro:assets';
 import { readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 
 // Dynamically load gallery images at build time
-let galleryImages: string[] = [];
+let galleryImages: { src: string; alt: string }[] = [];
 try {
   const galleryPath = join(process.cwd(), 'public', 'gallery');
   const files = await readdir(galleryPath);
   
   // Filter for image files (jpg, jpeg, png) and sort them
-  galleryImages = files
+  const imageFiles = files
     .filter(file => /\.(jpg|jpeg|png)$/i.test(file))
     .sort();
     
-  console.log(`Found ${galleryImages.length} gallery images:`, galleryImages);
+  // Create image objects with proper imports for Astro Image optimization
+  galleryImages = imageFiles.map((file, index) => ({
+    src: `/gallery/${file}`,
+    alt: `Wedding photo ${index + 1}`
+  }));
+    
+  console.log(`Found ${galleryImages.length} gallery images:`, imageFiles);
 } catch (error) {
   console.warn('Could not read gallery directory:', error);
   galleryImages = [];
@@ -24,13 +31,14 @@ try {
 <div class="photo-gallery-container">
   <!-- Masonry Grid -->
   <div id="photo-gallery" class="masonry-grid">
-    {galleryImages.map((image, index) => (
+    {galleryImages.map((image) => (
       <div class="masonry-item">
         <img 
-          src={`/gallery/${image}`} 
-          alt={`Wedding photo ${index + 1}`} 
-          class="gallery-image" 
-          loading="lazy" 
+          src={`/cdn-cgi/image/width=800,quality=85,format=webp${image.src}`}
+          alt={image.alt}
+          class="gallery-image"
+          loading="lazy"
+          data-original-src={image.src}
         />
       </div>
     ))}
@@ -71,7 +79,9 @@ try {
     galleryImages.forEach((img) => {
       const imageElement = img as HTMLImageElement;
       imageElement.addEventListener('click', () => {
-        openModal(imageElement.src, imageElement.alt);
+        // For optimized images, we'll use the original source for the modal
+        const originalSrc = imageElement.getAttribute('data-original-src') || imageElement.src;
+        openModal(originalSrc, imageElement.alt);
       });
       
       // Handle image load errors gracefully
