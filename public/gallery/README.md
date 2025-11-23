@@ -4,10 +4,20 @@ This directory contains the wedding photos that will be displayed on the `/the-d
 
 ## Adding Photos
 
-1. Add your wedding photos to this directory
-2. Name them consistently (e.g., `wedding-001.jpg`, `wedding-002.jpg`, etc.)
-3. Update the `loadGalleryImages()` function in `/src/components/PhotoGallery.astro` to include the new filenames
-4. Supported formats: JPG, PNG
+1. **Simply add your wedding photos to this directory** - that's it!
+2. Supported formats: JPG, JPEG, PNG (case insensitive)
+3. Photos are automatically detected and loaded at build time
+4. Images are sorted alphabetically by filename
+5. No code changes needed - just drop files here and rebuild
+
+## Automatic Detection
+
+The gallery component automatically:
+- ✅ Scans this folder during build
+- ✅ Filters for image files (.jpg, .jpeg, .png)
+- ✅ Sorts them alphabetically
+- ✅ Generates the gallery HTML
+- ✅ Sets up click handlers for fullscreen view
 
 ## Current Photos
 

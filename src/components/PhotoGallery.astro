@@ -1,11 +1,39 @@
 ---
 // Photo Gallery component with masonry layout and fullscreen modal
+import { readdir } from 'node:fs/promises';
+import { join } from 'node:path';
+
+// Dynamically load gallery images at build time
+let galleryImages: string[] = [];
+try {
+  const galleryPath = join(process.cwd(), 'public', 'gallery');
+  const files = await readdir(galleryPath);
+  
+  // Filter for image files (jpg, jpeg, png) and sort them
+  galleryImages = files
+    .filter(file => /\.(jpg|jpeg|png)$/i.test(file))
+    .sort();
+    
+  console.log(`Found ${galleryImages.length} gallery images:`, galleryImages);
+} catch (error) {
+  console.warn('Could not read gallery directory:', error);
+  galleryImages = [];
+}
 ---
 
 <div class="photo-gallery-container">
   <!-- Masonry Grid -->
   <div id="photo-gallery" class="masonry-grid">
-    <!-- Photos will be dynamically loaded here -->
+    {galleryImages.map((image, index) => (
+      <div class="masonry-item">
+        <img 
+          src={`/gallery/${image}`} 
+          alt={`Wedding photo ${index + 1}`} 
+          class="gallery-image" 
+          loading="lazy" 
+        />
+      </div>
+    ))}
   </div>
 
   <!-- Fullscreen Modal -->
@@ -32,46 +60,28 @@
     const modalImage = document.getElementById('modal-image') as HTMLImageElement;
     const closeButton = document.getElementById('close-modal');
     const modalBackdrop = modal?.querySelector('.modal-backdrop');
+    const galleryImages = document.querySelectorAll('.gallery-image');
 
     if (!gallery || !modal || !modalImage || !closeButton || !modalBackdrop) {
       console.error('Required gallery elements not found');
       return;
     }
 
-    // Gallery images - add your actual filenames here
-    function loadGalleryImages(): string[] {
-      const images = [
-        'wedding-001.jpg',
-        'wedding-002.jpg',
-        'wedding-003.jpg',
-        // Add more wedding photos as they're added to public/gallery/
-      ];
-
-      return images;
-    }
-
-    // Create masonry layout
-    function createMasonryItem(imageSrc: string, index: number): HTMLDivElement {
-      const item = document.createElement('div');
-      item.className = 'masonry-item';
-      
-      const img = document.createElement('img');
-      img.src = `/gallery/${imageSrc}`;
-      img.alt = `Wedding photo ${index + 1}`;
-      img.className = 'gallery-image';
-      img.loading = 'lazy';
-      
-      // Add click handler for fullscreen
-      img.addEventListener('click', () => openModal(img.src, img.alt));
-      
-      // Handle image load errors gracefully
-      img.addEventListener('error', () => {
-        item.style.display = 'none';
+    // Add click handlers to existing gallery images
+    galleryImages.forEach((img) => {
+      const imageElement = img as HTMLImageElement;
+      imageElement.addEventListener('click', () => {
+        openModal(imageElement.src, imageElement.alt);
       });
       
-      item.appendChild(img);
-      return item;
-    }
+      // Handle image load errors gracefully
+      imageElement.addEventListener('error', () => {
+        const parentItem = imageElement.closest('.masonry-item') as HTMLElement;
+        if (parentItem) {
+          parentItem.style.display = 'none';
+        }
+      });
+    });
 
     // Open fullscreen modal
     function openModal(imageSrc: string, imageAlt: string): void {
@@ -138,13 +148,6 @@
       if (e.key === 'Escape' && modal.style.display !== 'none') {
         closeModal();
       }
-    });
-
-    // Load and display images
-    const images = loadGalleryImages();
-    images.forEach((imageSrc, index) => {
-      const item = createMasonryItem(imageSrc, index);
-      gallery.appendChild(item);
     });
 
     // Animate items in
