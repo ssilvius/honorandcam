@@ -61,6 +61,9 @@ try {
   import { gsap } from 'gsap';
 
   document.addEventListener('DOMContentLoaded', function() {
+    // Add class to enable JavaScript-enhanced animations
+    document.body.classList.add('js-enabled');
+    
     const gallery = document.getElementById('photo-gallery');
     const modal = document.getElementById('photo-modal');
     const modalImage = document.getElementById('modal-image') as HTMLImageElement;
@@ -156,13 +159,15 @@ try {
       }
     });
 
-    // Animate items in
-    gsap.from('.masonry-item', {
-      opacity: 0,
-      y: 50,
+    // Set initial state and animate items in
+    gsap.set('.masonry-item', { opacity: 0, y: 50 });
+    gsap.to('.masonry-item', {
+      opacity: 1,
+      y: 0,
       duration: 0.6,
       stagger: 0.1,
-      ease: "power2.out"
+      ease: "power2.out",
+      delay: 0.1
     });
   });
 </script>
@@ -237,7 +242,7 @@ try {
     display: none;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 0;
   }
 
   .modal-backdrop {
@@ -252,29 +257,33 @@ try {
 
   .modal-content {
     position: relative;
-    max-width: 90vw;
-    max-height: 90vh;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 2rem;
+    box-sizing: border-box;
   }
 
   .modal-image {
     max-width: 100%;
     max-height: 100%;
+    width: auto;
+    height: auto;
     object-fit: contain;
     border-radius: 0.5rem;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
   }
 
   .close-button {
-    position: absolute;
-    top: -3rem;
-    right: -3rem;
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
     width: 3rem;
     height: 3rem;
     background-color: rgba(251, 254, 251, 0.1);
-    border: 2px solid rgba(251, 254, 251, 0.2);
+    border: 2px solid rgba(251, 254, 251, 0.3);
     border-radius: 50%;
     color: #FBFEFB;
     cursor: pointer;
@@ -282,31 +291,33 @@ try {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(8px);
+    z-index: 1001;
   }
 
   .close-button:hover {
     background-color: rgba(251, 254, 251, 0.2);
-    border-color: rgba(251, 254, 251, 0.4);
+    border-color: rgba(251, 254, 251, 0.5);
     transform: scale(1.1);
   }
 
   /* Mobile adjustments for close button */
   @media (max-width: 640px) {
     .close-button {
-      top: -2rem;
-      right: -1rem;
+      top: 1rem;
+      right: 1rem;
       width: 2.5rem;
       height: 2.5rem;
     }
-    
-    .photo-modal {
-      padding: 1rem;
-    }
   }
 
-  /* Loading states */
+  /* Ensure images are visible by default, animation will enhance the experience */
   .masonry-item {
+    opacity: 1;
+  }
+  
+  /* Only hide for animation if JavaScript is enabled */
+  .js-enabled .masonry-item {
     opacity: 0;
   }
 </style>
